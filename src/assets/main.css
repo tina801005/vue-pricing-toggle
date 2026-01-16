@@ -1,0 +1,13 @@
+body{
+  background-color: var(--body-background);
+  font-family: var(--font-famil);
+}
+
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: var(--font-weight);
+}
+

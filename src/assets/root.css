@@ -1,0 +1,51 @@
+:root{
+    /* 顏色 */
+    --white: hsl(240, 78%, 98%);
+    --Gray: hsl(233, 13%, 49%);
+    --black: hsl(232, 13%, 33%);
+    --purple:hsl(237, 73%, 79%);
+    --darkPurple:hsl(238, 63%, 64%);
+    --gradient:linear-gradient(to right, hsl(237, 73%, 79%), hsl(238, 63%, 64%));
+
+    /* 主要顏色 */
+    --body-background: var(--white);
+    --switch-ball: var(--white);
+    --switch-background: var(--gradient);
+    --select-card-background: var(--gradient);
+    --more-btn-background: var(--gradient);
+    --select-card-morebtn-background: var(--white);
+    --hr-color:hsl(233, 13%, 49%,0.3);
+
+
+    /* 邊框 */
+    --card-border-radius: 10px;
+    --more-btn-border-radius: 10px;
+    --switch-ball: 50%;
+    --switch-border-radius: 20px;
+
+    /* 文字 */
+    /* 通用 */
+    --font-family: "Montserrat", sans-serif;
+    --font-weight: 700;
+
+    /* 標題文字 */
+    --page-title-font-color: var(--Gray);
+    --page-title-font-size: 32px;
+
+    /* switch文字 */
+    --switch-font-color: hsl(233, 13%, 49%,0.4);
+    --switch-font-size: 15px;
+
+    /* card文字 */
+    --card-font-color: var(--black);
+    --select-cart-font-color: var(--white);
+    --card-price-font-size: 68px;
+    --card-title-font-size: 18px;
+    --card-content-font-size: 15px;
+    --card-dollarsign-size: 40px;
+
+    /* 按鈕文字 */
+    --more-btn-font-size: 13px;
+    --select-more-btn-font-color: var(--darkPurple);
+    --more-btn-font-color: var(--white);
+}

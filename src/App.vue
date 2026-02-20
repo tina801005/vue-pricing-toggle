@@ -1,32 +1,68 @@
 <script setup></script>
 
 <template>
-    <!-- 頁面標題 開始 -->
-    <h1 class="title">Our Pricing</h1>
-    <!-- 頁面標題結束 -->
-    
-    <!-- 定價模式切換按鈕 開始 -->
-    <div class="pricing-model">
-        <p>Annually</p>
-        <label for="toggle" class="toggle">
-            <input type="checkbox" name="" id="toggle">
-            <div class="btn-toggle"></div>
-        </label>
-        <p>Monthly</p>
-    </div>
-    <!-- 定價模式切換按鈕 結束 -->
-    
-    <!-- 價格卡片 開始 -->
     <section class="pricing-area">
-        <div class="card card-basic">
-            
-        </div>
-        <div class="card card-pro">
-            
-        </div>
-        <div class="card card-master">
-
-        </div>
+        <!-- 頁面標題 開始 -->
+        <h1 class="title">Our Pricing</h1>
+        <!-- 頁面標題結束 -->
+    
+        <form>
+            <!-- 定價模式切換按鈕 開始 -->
+            <div class="pricing-model">
+                <p>Annually</p>
+                <label for="toggle" class="toggle">
+                    <input type="checkbox" name="" id="toggle">
+                    <div class="btn-toggle"></div>
+                </label>
+                <p>Monthly</p>
+            </div>
+        <!-- 定價模式切換按鈕 結束 -->
+        
+        <!-- 價格卡片 開始 -->
+        <!-- 此處為雛形，尚須改善。
+        改善方向：
+        1. fieldset>label>input+div，
+        2. legend隱藏，
+        3. input原使用隱藏為display:none;改為visiable:hiddle; -->
+        
+            <fieldset>
+                <legend>123</legend>
+                <div class="card">
+                    <input type="radio" id="basic" value="basic" name="plan">
+                    <label for="basic">
+                        <h2>Basic</h2>
+                        <p><span>&dollar;</span>19.99</p>
+                        <p>500 GB Storage</p>
+                        <p>2 Users Allowed</p>
+                        <p>Send up to 3 GB</p>
+                        <a href="#">Learn More</a>
+                    </label>
+                </div>
+                <div class="card">
+                    <input type="radio" id="professional" value="professional" name="plan">
+                    <label for="professional">
+                        <h2>Professional</h2>
+                        <p><span>&dollar;</span>24.99</p>
+                        <p>1 TB Storage</p>
+                        <p>5 Users Allowed</p>
+                        <p>Send up to 10 GB</p>
+                        <a href="#">Learn More</a>
+                    </label>
+                </div>
+                <div class="card">
+                    <input type="radio" id="master" value="master" name="plan">
+                    <label for="master">
+                        <h2>Master</h2>
+                        <p><span>&dollar;</span>39.99</p>
+                        <p>2 TB Storage</p>
+                        <p>10 Users Allowed</p>
+                        <p>Send up to 20 GB</p>
+                        <a href="#">Learn More</a>
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+        
     </section>
     <!-- 價格卡片 結束 -->
 </template>
@@ -76,9 +112,10 @@
 input:checked + .btn-toggle::before{
     margin-left: 35px;
 }
+/*  
 input{
     display: none;
-}
+}*/
 /* 定價按鈕區塊 結束 */
 
 /* 價格卡片開始 */

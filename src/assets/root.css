@@ -11,6 +11,7 @@
     --body-background: var(--white);
     --switch-ball: var(--white);
     --switch-background: var(--gradient);
+    --price-card-background: var(--white);
     --select-card-background: var(--gradient);
     --more-btn-background: var(--gradient);
     --select-card-morebtn-background: var(--white);
@@ -49,3 +50,4 @@
     --select-more-btn-font-color: var(--darkPurple);
     --more-btn-font-color: var(--white);
 }
+

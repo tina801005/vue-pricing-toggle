@@ -1,24 +1,36 @@
 <script setup>
+import { ref } from 'vue';
 import { plans } from '../script/plans.js'
 
+// 預設第二張卡片選中
+const selectedPlan = ref('professional')
+
+// 從父組件App.vue接收定價模式
+defineProps({
+    pricingMode: {
+        type: String,
+        required: true
+    }
+})
 </script>
 
 <template>
-    <legend>Select Plan</legend>
+    <legend class="sr-only">Select Plan</legend>
     <label v-for="plan in plans" 
     :key="plan.id" 
     class="plan-card" 
     :for="plan.id">
 
-        <input class="sr-only" 
+        <input class="sr-only card-radio" 
         type="radio" 
         :id="plan.id" 
-        :value="plan.id" 
-        name="plan">
+        :value="plan.id"
+        name="plan"
+        :checked="plan.id === selectedPlan">
 
         <div class="card">
             <h2 class="card-title">{{ plan.title }}</h2>
-            <p class="card-price"><span class="dollar-sign">&dollar;</span>{{ plan.price.monthly }}</p>
+            <p class="card-price"><span class="dollar-sign">&dollar;</span>{{ plan.price[pricingMode] }}</p>
             <ul>
                 <li class="card-content">{{ plan.storage }} Storage</li>
                 <li class="card-content">{{ plan.users }} Users Allowed</li>
@@ -32,24 +44,6 @@ import { plans } from '../script/plans.js'
 
 <style scoped>
 /*價格卡片開始*/
-.pricing-area legend{
-    display: none;
-}
-/* 隱藏radio小圓圈 */
-/* 不直接使用display:none和visibility: hidden;
-是因為前者會影響鍵盤控制，後者隱藏但會佔空位，所以用這個sr-only的方式
-畫面上看起來隱藏了但鍵盤滑鼠依然能控制選取 */
-.plan-card .sr-only{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
-}
 .plan-card .card{
     position: relative;
     width: 350px;
@@ -57,12 +51,12 @@ import { plans } from '../script/plans.js'
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0;
     padding: 30px;
     background-color: var(--price-card-background);
     border-radius: var(--card-border-radius);
-    box-shadow: 0 30px 50px -15px rgba(162, 166, 241,0.2);
+    box-shadow: 20px 0px 50px  rgba(162, 166, 241,0.3);
     z-index: 1;
+    transition: transform 1s ease;
 }
 
 /* card title */
@@ -92,15 +86,12 @@ import { plans } from '../script/plans.js'
     padding: 18px 94px;
     white-space: nowrap;
     border-top:1px solid var(--hr-color);
-    /* border-bottom:1px solid var(--hr-color); */
-    /* border: 1px solid red; */
 }
 .card .card-btn{
     border-top:1px solid var(--hr-color);
-    /* margin-top: 20px; */
 }
 .card .card-btn .btn-more{
-    border: none;
+    border: 1px solid transparent;
     display: block;
     text-align: center;
     padding: 15px 0;
@@ -108,13 +99,51 @@ import { plans } from '../script/plans.js'
     background: var(--more-btn-background);
     border-radius: var(--more-btn-border-radius);
     color: var(--more-btn-font-color);
-    /* display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--card-btn-background);
-    color: var(--card-btn-font-color);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease; */
+    transition: all 0.5s ease-out;
 }
+/* learnmore btn hover效果 */
+.card .card-btn .btn-more:hover{
+    background: var(--more-btn-hover-background);
+    color: var(--more-btn-hover-font-color);
+    border: 1px solid var(--more-btn-hover-border);
+}
+
+/* 當卡片radio:checked時，card添加選中樣式 */
+.plan-card .card-radio:checked + .card{
+    margin: 0 10px 0 5px;
+    background: var(--select-card-background);
+    transform: scale(1.08);
+    z-index: 10;
+    transition: transform 0.5s ease;
+}
+.plan-card .card-radio:checked + .card .card-title,
+.plan-card .card-radio:checked + .card .card-price
+{
+    color: var(--select-card-font-color);
+}
+.plan-card .card-radio:checked + .card .card-content,
+.plan-card .card-radio:checked + .card .card-btn
+{
+    color: var(--select-card-font-color);
+    border-top:1px solid var(--select-hr-color);
+}
+.plan-card .card-radio:checked + .card .card-btn .btn-more{
+    background: var(--select-card-morebtn-background);
+    color: var(--select-more-btn-font-color);
+}
+.plan-card .card-radio:checked + .card .card-btn .btn-more:hover{
+    background: var( --select-card-background);
+    color: var(--more-btn-font-color);
+    border: 1px solid var(--select-more-btn-hover-border);
+}
+
 /* 價格卡片結束 */
+
+/* RWD 卡片切換調整 */
+@media (max-width: 768px){
+    .plan-card .card-radio:checked + .card{
+        margin: 0;
+        transform: scale(1);
+    }
+}
 </style>

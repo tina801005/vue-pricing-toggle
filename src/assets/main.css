@@ -6,12 +6,9 @@ body{
   font-family: var(--font-family);
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
 }
 
 .container{
-  width: 100%;
   height: inherit;
   display: grid;
   place-items: center;
@@ -28,6 +25,7 @@ body{
   height: 562px;
   top: 0;
   right: 0;
+  transform: translate(50%);
   z-index: -1;
 }
 .container::after{
@@ -41,15 +39,18 @@ body{
   height: 305px;
   bottom: 0;
   left: 0;
+  transform: translate(-50%);
   z-index: -1;
 }
 
 #app {
-  width: 1050px;
-  height: 668px;
+  margin: 70px auto;
   font-weight: var(--font-weight);
 }
-
+/* 不使用display:none和visibility:hidden的隱藏方法 
+前者會影響鍵盤控制，後者隱藏但會佔空位，所以用這個sr-only的方式
+畫面上看起來隱藏了但鍵盤滑鼠依然能控制選取，既不占空間也不影響美觀和無障礙設置*/
+/* 隱藏 */
 .sr-only{
     position: absolute;
     width: 1px;
@@ -60,4 +61,11 @@ body{
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border: 0;
+}
+
+/* RWD */
+@media (max-width: 768px){
+    .container::after{
+        display: none;
+    }
 }

@@ -14,8 +14,8 @@
     --price-card-background: var(--white);
     --select-card-background: var(--gradient);
     --more-btn-background: var(--gradient);
+    --more-btn-hover-background: var(--white);
     --select-card-morebtn-background: var(--white);
-    --hr-color:hsl(233, 13%, 49%,0.3);
 
 
     /* 邊框 */
@@ -23,6 +23,12 @@
     --more-btn-border-radius: 10px;
     --switch-ball: 50%;
     --switch-border-radius: 20px;
+
+    /* 邊框顏色 */
+    --hr-color:hsl(233, 13%, 49%,0.3);
+    --select-hr-color:hsl(240, 78%, 98%,0.3);
+    --more-btn-hover-border:var(--Gray);
+    --select-more-btn-hover-border: var( --white);
 
     /* 文字 */
     /* 通用 */
@@ -39,7 +45,7 @@
 
     /* card文字 */
     --card-font-color: var(--black);
-    --select-cart-font-color: var(--white);
+    --select-card-font-color: var(--white);
     --card-price-font-size: 68px;
     --card-title-font-size: 18px;
     --card-content-font-size: 15px;
@@ -49,5 +55,6 @@
     --more-btn-font-size: 13px;
     --select-more-btn-font-color: var(--darkPurple);
     --more-btn-font-color: var(--white);
+    --more-btn-hover-font-color: var(--darkPurple);
 }
 

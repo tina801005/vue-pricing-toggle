@@ -1,5 +1,13 @@
 <script setup>
+import { ref } from 'vue';
 import Card from './components/card.vue';
+
+
+// 預設toggle狀態
+const pricingMode = ref('annually')
+const togglePrice = () => {
+    pricingMode.value = pricingMode.value === 'monthly' ? 'annually' : 'monthly'
+}
 
 </script>
 
@@ -14,7 +22,11 @@ import Card from './components/card.vue';
             <div class="pricing-model">
                 <p>Annually</p>
                 <label for="toggle" class="toggle">
-                    <input type="checkbox" id="toggle" class="billing-toggle">
+                    <input 
+                    type="checkbox" 
+                    id="toggle" 
+                    class="billing-toggle sr-only"
+                    @change="togglePrice">
                     <div class="btn-toggle"></div>
                 </label>
                 <p>Monthly</p>
@@ -22,15 +34,9 @@ import Card from './components/card.vue';
         <!-- 定價模式切換按鈕 結束 -->
         
         <!-- 價格卡片 開始 -->
-        <!-- 此處為雛形，尚須改善。
-        改善方向：
-        1. fieldset>label>input+div，
-        2. legend隱藏，
-        3. input原使用隱藏為display:none;改為visiable:hiddle; -->
-
         <!-- 從card引入連結 -->
         <fieldset class="pricing-area">
-            <Card>
+            <Card :pricingMode="pricingMode" key="card">
                 <slot></slot>
             </Card>
         </fieldset>
@@ -60,9 +66,6 @@ import Card from './components/card.vue';
 .toggle{
     margin: 0 25px;
 }
-.toggle .billing-toggle{
-    display: none; 
-}
 .pricing-model p{
     color: var(--switch-font-color);
 }
@@ -73,6 +76,7 @@ import Card from './components/card.vue';
     background: var(--switch-background);
     position: relative;
     padding: 5px;
+    cursor: pointer;
 }
 .btn-toggle::before{
     content:"";
@@ -89,15 +93,34 @@ import Card from './components/card.vue';
 .toggle .billing-toggle:checked + .btn-toggle::before{
     margin-left: 25px;
 }
+/* toggle hover時添加微透明的白色遮罩 */
+.toggle .btn-toggle:hover::after{
+    content:"";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: inherit;
+    top: 0;
+    left: 0;
+}
 
 /* 定價按鈕區塊 結束 */
 .pricing-area{
     margin-top: 65px;
     width: inherit;
-    height: 455px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
+}
+
+/* RWD pricing卡片垂直*/
+@media (max-width: 768px){
+    .pricing-area{
+        flex-direction: column;
+        height: auto;
+        gap: 30px;
+    }
 }
 </style>

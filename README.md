@@ -1,4 +1,14 @@
-# vue-pricing-toggle
+<!-- 架構：
+gif
+標題
+簡介(架構、技術棧(用github的標籤))
+說明(作品連結、主要功能)
+核心亮點
+問題挑戰與解決方案
+結語
+ -->
+
+<!-- # vue-pricing-toggle
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -35,4 +45,4 @@ npm run dev
 
 ```sh
 npm run build
-```
+``` -->

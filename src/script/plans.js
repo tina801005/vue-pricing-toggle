@@ -16,7 +16,7 @@ export const plans = [
         title: 'Professional',
         price:{
             monthly:29.99,
-            annually:299.99
+            annually:249.99
         },
         storage:'1 TB',
         users :5,

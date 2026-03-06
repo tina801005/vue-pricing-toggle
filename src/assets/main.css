@@ -4,47 +4,56 @@
 body{
   background-color: var(--body-background);
   font-family: var(--font-family);
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+/* 背景裝飾 */
+.bg-decor{
+  position: fixed; 
+  pointer-events: none; /* 讓背景裝飾不會干擾到使用者的點擊事件 */
+  z-index: -1; /* 確保背景裝飾在其他元素的下方 */
+}
+.top-right{
+  width: 360px;
+  height: 562px;
+  background-image: url(./images/bg-top.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 0;
+  right: 0;
+  transform: translateX(10%);
+}
+
+.bottom-left{
+  width: 357px;
+  height: 305px;
+  background-image: url(./images/bg-bottom.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  bottom: 0;
+  left: 0;
+  transform: translate(-10%, 10%);
 }
 
 .container{
-  height: inherit;
+  width: 90%;
+  max-width: 1050px;
+  min-width: 375px;
   display: grid;
   place-items: center;
   position: relative;
-}
-.container::before{
-  content: "";
-  background-image: url(./src/assets/images/bg-top.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: absolute;
-  width: 368px;
-  height: 562px;
-  top: 0;
-  right: 0;
-  transform: translate(50%);
-  z-index: -1;
-}
-.container::after{
-  content:"";
-  background-image: url(./src/assets/images/bg-bottom.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: absolute;
-  width: 357px;
-  height: 305px;
-  bottom: 0;
-  left: 0;
-  transform: translate(-50%);
-  z-index: -1;
+  margin: 0 auto;
+  padding: 40px 0;
 }
 
 #app {
-  margin: 70px auto;
   font-weight: var(--font-weight);
 }
 /* 不使用display:none和visibility:hidden的隱藏方法 
@@ -64,8 +73,11 @@ body{
 }
 
 /* RWD */
-@media (max-width: 768px){
-    .container::after{
-        display: none;
-    }
+@media (max-width: 800px){
+  .top-right{
+    transform: translateX(50%);
+  }
+  .bottom-left{
+      display: none;
+  }
 }

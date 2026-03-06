@@ -15,4 +15,6 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  plugins: [vue()],
+  base: '/vue-pricing-toggle/',
 })

@@ -33,6 +33,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
         name="plan"
         :checked="plan.id === selectedPlan"
         @change="selectedPlan = plan.id"
+        :aria-label="`${plan.title}, ${plan.price[pricingMode]}`"
         >
 
         <div class="card">
@@ -49,7 +50,8 @@ const showModal = ref(false); // 控制模態框顯示狀態
                     aria-haspopup="dialog"
                     aria-expanded="showModal"
                     :tabindex="plan.id === selectedPlan ? 0 : -1"
-                    aria-label="Learn more about the {{ plan.title }} plan"
+                    :aria-label="`Learn more about the ${plan.title} plan`"
+                    :aria-hidden="true"
                     >Learn More
                         <span class="sr-only">about the {{ plan.title }} plan</span>
                     </button>

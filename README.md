@@ -49,7 +49,7 @@ src/
 
 ### 💡技術亮點
 
-* 無障礙設計：針對check-box和radio的隱藏不使用display:none和visibility:hidden，改用"sr-only"隱藏。此方法既可實現隱藏效果也為螢幕閱讀器及鍵盤保留了操作性。
+* 無障礙設計：針對checkbox和radio的隱藏不使用display:none和visibility:hidden，改用"sr-only"隱藏。此方法既可實現隱藏效果也為螢幕閱讀器及鍵盤保留了操作性。
 
 * 利用input:check來實現選中/切換效果：定價卡片使用radio、定價切換按鈕用checkbox來做，並使用input:check驅動css達成卡片選中及定價切換的效果，減少JavaScript對DOM的干預，讓整體跑起來更順暢。
 

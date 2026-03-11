@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { plans } from '../script/plans.js'
+import { FocusTrap } from 'focus-trap-vue';
+
 
 // 預設第二張卡片選中
 const selectedPlan = ref('professional')
@@ -10,23 +11,29 @@ defineProps({
     pricingMode: {
         type: String,
         required: true
+    },
+    plan: {
+        type: Object,
+        required: true
     }
 })
+
+const showModal = ref(false); // 控制模態框顯示狀態
+
 </script>
 
 <template>
     <legend class="sr-only">Select Plan</legend>
-    <label v-for="plan in plans" 
-    :key="plan.id" 
-    class="plan-card" 
-    :for="plan.id">
+    <label class="plan-card" :for="plan.id">
 
         <input class="sr-only card-radio" 
         type="radio" 
         :id="plan.id" 
         :value="plan.id"
         name="plan"
-        :checked="plan.id === selectedPlan">
+        :checked="plan.id === selectedPlan"
+        @change="selectedPlan = plan.id"
+        >
 
         <div class="card">
             <h2 class="card-title">{{ plan.title }}</h2>
@@ -35,11 +42,39 @@ defineProps({
                 <li class="card-content">{{ plan.storage }} Storage</li>
                 <li class="card-content">{{ plan.users }} Users Allowed</li>
                 <li class="card-content">Send up to {{ plan.send }} GB</li>
-                <li class="card-btn"><a href="#" class="btn-more">Learn More</a></li>
+                <li class="card-btn">
+                    <button type="button" 
+                    class="btn-more" 
+                    @click.prevent=" showModal = true"
+                    aria-haspopup="dialog"
+                    aria-expanded="showModal"
+                    :tabindex="plan.id === selectedPlan ? 0 : -1"
+                    aria-label="Learn more about the {{ plan.title }} plan"
+                    >Learn More
+                        <span class="sr-only">about the {{ plan.title }} plan</span>
+                    </button>
+                    
+                    <!-- 點擊learn more按鈕跳出小視窗介紹專案 -->
+                    <Teleport to="body">
+                        <FocusTrap v-if="showModal" :active="true">
+                            <div v-if="showModal" @click.self="showModal = false">
+                                <div class="mask"></div>
+                                <div class="learnmore" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+                                    <h2>{{plan.title}} Details</h2>
+                                    <p>Lorem IpsumLorem IpsumLorem Ipsum</p>
+                                    <button @click="showModal = false" class="btn-close" aria-label="Close">X</button>
+                                </div>
+                            </div>
+                        </FocusTrap>
+                    </Teleport>
+                </li>
+                
             </ul>
-            
         </div>
     </label>
+
+    
+
 </template>
 
 <style scoped>
@@ -99,6 +134,8 @@ defineProps({
 .card .card-btn .btn-more{
     border: 1px solid transparent;
     display: block;
+    width: 100%;
+    text-decoration: none;
     text-align: center;
     padding: 15px 0;
     margin-top: 30px;
@@ -106,6 +143,15 @@ defineProps({
     border-radius: var(--more-btn-border-radius);
     color: var(--more-btn-font-color);
     transition: all 0.5s ease-out;
+    font-family: inherit; 
+    font-weight: var(--font-weight);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+.btn-more:focus-visible{
+    box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
+    transition: box-shadow 0.2s ease;
 }
 /* learnmore btn hover效果 */
 .card .card-btn .btn-more:hover{
@@ -144,6 +190,69 @@ defineProps({
 }
 
 /* 價格卡片結束 */
+
+.card-radio:focus-visible + .card {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
+    transition: box-shadow 0.2s ease;
+}
+
+/* learnmore置中 */
+.learnmore{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: var(--body-background);
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 20px 0px 50px  rgba(162, 166, 241,0.3);
+}
+
+
+/* close-btn */
+.btn-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--select-more-btn-font-color);
+    padding: 10px;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+.btn-close:hover{
+    border: 1px solid var(--select-more-btn-font-color);
+}
+.btn-close:focus-visible{
+    box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
+    transition: box-shadow 0.2s ease;
+}
+
+/* mask */
+.mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
 
 /* RWD 卡片切換調整 */
 @media (max-width: 768px){

@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import Card from './components/card.vue';
+import { plans } from './script/plans.js'
+
 
 
 // 預設toggle狀態
@@ -8,6 +10,9 @@ const pricingMode = ref('annually')
 const togglePrice = () => {
     pricingMode.value = pricingMode.value === 'monthly' ? 'annually' : 'monthly'
 }
+
+
+
 
 </script>
 
@@ -26,7 +31,8 @@ const togglePrice = () => {
                     type="checkbox" 
                     id="toggle" 
                     class="billing-toggle sr-only"
-                    @change="togglePrice">
+                    @change="togglePrice"
+                    aria-label="Toggle between monthly and yearly billing">
                     <div class="btn-toggle"></div>
                 </label>
                 <p>Monthly</p>
@@ -36,9 +42,11 @@ const togglePrice = () => {
         <!-- 價格卡片 開始 -->
         <!-- 從card引入連結 -->
         <fieldset class="pricing-area">
-            <Card :pricingMode="pricingMode" key="card">
-                <slot></slot>
-            </Card>
+            <Card 
+            v-for="plan in plans" 
+            :pricingMode="pricingMode" 
+            :plan="plan" 
+            :key="plan.id" />
         </fieldset>
         </form>
         
@@ -114,6 +122,12 @@ const togglePrice = () => {
     justify-content: center;
     align-items: center;
     border: none;
+}
+
+/* 焦點樣式 */
+.billing-toggle:focus-visible + .btn-toggle {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
+    transition: box-shadow 0.2s ease;
 }
 
 /* RWD pricing卡片垂直*/

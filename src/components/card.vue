@@ -56,7 +56,9 @@ defineProps({
     border-radius: var(--card-border-radius);
     box-shadow: 20px 0px 50px  rgba(162, 166, 241,0.3);
     z-index: 1;
-    transition: transform 1s ease;
+    transition: transform 0.3s ease; 
+    user-select: none; /* 禁止文字選取 */
+    margin: 0 3px;
 }
 
 /* card title */
@@ -73,6 +75,10 @@ defineProps({
     display: flex;
     justify-content: center;
     align-items: center;
+    letter-spacing: 0.03em; 
+    /* 切換不同瀏覽器及登入狀態發現，在某些狀態下文字會被擠壓拉長，故添加letter-spacing改善此狀況*/ 
+    -webkit-font-smoothing: antialiased; /* 針對WebKit瀏覽器優化字體渲染 */
+    -moz-osx-font-smoothing: grayscale; /* 針對Firefox優化字體渲染 */
 }
 .card .card-price .dollar-sign{
     font-size: var(--card-dollarsign-size);

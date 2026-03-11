@@ -62,6 +62,7 @@ const togglePrice = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none; /* 禁止文字選取 */
 }
 .toggle{
     margin: 0 25px;

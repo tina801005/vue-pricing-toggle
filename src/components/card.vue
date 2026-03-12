@@ -23,9 +23,8 @@ const showModal = ref(false); // 控制模態框顯示狀態
 </script>
 
 <template>
-    <legend class="sr-only">Select Plan</legend>
+    <!-- <legend class="sr-only">Select Plan</legend> -->
     <label class="plan-card" :for="plan.id">
-
         <input class="sr-only card-radio" 
         type="radio" 
         :id="plan.id" 
@@ -36,7 +35,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
         :aria-label="`${plan.title}, ${plan.price[pricingMode]}`"
         >
 
-        <div class="card">
+        <span class="card">
             <h2 class="card-title">{{ plan.title }}</h2>
             <p class="card-price"><span class="dollar-sign">&dollar;</span>{{ plan.price[pricingMode] }}</p>
             <ul>
@@ -51,7 +50,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
                     aria-expanded="showModal"
                     :tabindex="plan.id === selectedPlan ? 0 : -1"
                     :aria-label="`Learn more about the ${plan.title} plan`"
-                    :aria-hidden="true"
+                    
                     >Learn More
                         <span class="sr-only">about the {{ plan.title }} plan</span>
                     </button>
@@ -64,7 +63,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
                                 <div class="learnmore" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
                                     <h2>{{plan.title}} Details</h2>
                                     <p>Lorem IpsumLorem IpsumLorem Ipsum</p>
-                                    <button @click="showModal = false" class="btn-close" aria-label="Close">X</button>
+                                    <button type="button" @click="showModal = false" class="btn-close" aria-label="Close">X</button>
                                 </div>
                             </div>
                         </FocusTrap>
@@ -72,7 +71,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
                 </li>
                 
             </ul>
-        </div>
+        </span>
     </label>
 
     

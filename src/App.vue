@@ -26,14 +26,14 @@ const togglePrice = () => {
             <!-- 定價模式切換按鈕 開始 -->
             <div class="pricing-model">
                 <p>Annually</p>
-                <label for="toggle" class="toggle">
+                <label class="toggle">
                     <input 
                     type="checkbox" 
                     id="toggle" 
                     class="billing-toggle sr-only"
                     @change="togglePrice"
                     aria-label="Toggle between monthly and yearly billing">
-                    <div class="btn-toggle"></div>
+                    <span class="btn-toggle"></span>
                 </label>
                 <p>Monthly</p>
             </div>
@@ -41,13 +41,14 @@ const togglePrice = () => {
         
         <!-- 價格卡片 開始 -->
         <!-- 從card引入連結 -->
-        <fieldset class="pricing-area">
-            <Card 
-            v-for="plan in plans" 
-            :pricingMode="pricingMode" 
-            :plan="plan" 
-            :key="plan.id" />
-        </fieldset>
+            <fieldset class="pricing-area">
+                <legend class="sr-only">Select Plan</legend>
+                <Card 
+                v-for="plan in plans" 
+                :pricingMode="pricingMode" 
+                :plan="plan" 
+                :key="plan.id" />
+            </fieldset>
         </form>
         
     </section>
@@ -86,6 +87,7 @@ const togglePrice = () => {
     position: relative;
     padding: 5px;
     cursor: pointer;
+    display: block;
 }
 .btn-toggle::before{
     content:"";

@@ -154,6 +154,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
 .btn-more:focus-visible{
     box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
     transition: box-shadow 0.2s ease;
+    outline-color: var(--purple) ;
 }
 /* learnmore btn hover效果 */
 .card .card-btn .btn-more:hover{
@@ -200,7 +201,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
 
 /* learnmore置中 */
 .learnmore{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -242,6 +243,7 @@ const showModal = ref(false); // 控制模態框顯示狀態
 .btn-close:focus-visible{
     box-shadow: 0 0 0 3px white, 0 0 0 6px hsl(237, 73%, 79%); 
     transition: box-shadow 0.2s ease;
+    outline-color: var(--purple) ;
 }
 
 /* mask */
